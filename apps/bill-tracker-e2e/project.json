@@ -1,0 +1,10 @@
+{
+  "name": "bill-tracker-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/bill-tracker-e2e/src",
+  "tags": [],
+  "implicitDependencies": ["bill-tracker"],
+  "// targets": "to see all targets run: nx show project bill-tracker-e2e --web",
+  "targets": {}
+}
