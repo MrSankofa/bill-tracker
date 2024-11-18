@@ -1,10 +1,63 @@
 <router-outlet></router-outlet>
 
-<div class="flex flex-col items-center justify-center h-screen bg-gray-100">
-  <h1 class="text-4xl font-bold text-blue-500">
-    Welcome to Nx Angular with Tailwind CSS!
-  </h1>
-  <p class="mt-4 text-lg text-gray-700">
-    This is a standalone Angular app powered by Tailwind CSS.
-  </p>
-</div>
+<section class="bg-gray-100 p-6">
+  <div class="container mx-auto max-w-2xl">
+    <h1 class="text-2xl font-bold mb-4 text-center">Bill Tracker</h1>
+  
+    <!-- Form to Add/Update Bills -->
+    <form id="bill-form" class="bg-white p-4 rounded shadow mb-4">
+      <input type="hidden" id="bill-id">
+      <div class="mb-3">
+        <label class="block text-sm font-medium">Bill Name</label>
+        <input type="text" id="bill-name" class="w-full p-2 border rounded" required>
+      </div>
+      <div class="mb-3">
+        <label class="block text-sm font-medium">Due Date</label>
+        <input type="date" id="due-date" class="w-full p-2 border rounded" required>
+      </div>
+      <div class="mb-3">
+        <label class="block text-sm font-medium">Amount ($)</label>
+        <input type="number" id="bill-amount" class="w-full p-2 border rounded" required>
+      </div>
+      <div class="mb-3">
+        <label class="block text-sm font-medium">Source</label>
+        <input type="text" id="source" class="w-full p-2 border rounded" required>
+      </div>
+      <div class="mb-3">
+        <label class="block text-sm font-medium">Category</label>
+        <input type="text" id="category" class="w-full p-2 border rounded" required>
+      </div>
+      <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
+        Save Bill
+      </button>
+    </form>
+  
+    <!-- Upload CSV File Section -->
+    <div class="bg-white p-4 rounded shadow mb-4">
+      <h2 class="text-lg font-bold mb-3">Upload CSV File</h2>
+      <input type="file" id="csv-file" accept=".csv" class="w-full mb-3 p-2 border rounded">
+      <button onclick="uploadCSV()" class="w-full bg-green-500 text-white p-2 rounded hover:bg-green-600">
+        Import Bills from CSV
+      </button>
+    </div>
+  
+    <!-- Table of Bills with Sortable Columns -->
+    <div class="bg-white p-4 rounded shadow">
+      <h2 class="text-lg font-bold mb-3">Bills</h2>
+      <table class="w-full table-auto">
+        <thead>
+          <tr class="bg-gray-200">
+            <th class="p-2 text-left cursor-pointer" onclick="sortBills('name')">Bill Name</th>
+            <th class="p-2 text-left cursor-pointer" onclick="sortBills('dueDate')">Due Date</th>
+            <th class="p-2 text-left cursor-pointer" onclick="sortBills('amount')">Amount ($)</th>
+            <th class="p-2 text-left cursor-pointer" onclick="sortBills('source')">Source</th>
+            <th class="p-2 text-left cursor-pointer" onclick="sortBills('category')">Category</th>
+            <th class="p-2 text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="bills-table"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
