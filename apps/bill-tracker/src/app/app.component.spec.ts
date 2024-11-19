@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppComponent, NxWelcomeComponent, RouterModule.forRoot([])],
+      imports: [AppComponent, RouterModule.forRoot([])],
     }).compileComponents();
   });
 
@@ -15,7 +15,7 @@ describe('AppComponent', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('h1')?.textContent).toContain(
-      'Welcome bill-tracker'
+      'Bill Tracker'
     );
   });
 
