@@ -7,7 +7,7 @@ import { BillsEffects } from './+state/bills.effects';
 export const appRoutes: Route[] = [
   {
     path: '',
-    loadComponent: () => import('./app.component').then((m) => m.AppComponent),
+    loadComponent: () => import('./tracker/tracker.component').then((m) => m.TrackerComponent),
     providers: [
       provideState(fromBills.BILLS_FEATURE_KEY, fromBills.billsReducer),
       provideEffects(BillsEffects),
