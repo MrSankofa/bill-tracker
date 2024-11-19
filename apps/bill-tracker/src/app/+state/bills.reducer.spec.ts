@@ -76,6 +76,72 @@ describe('Bills Reducer', () => {
 
     });
 
+    it.todo('add bill failure test')
+
+    it('should update a bill in a list', () => {
+      const initialBill: BillsEntity = {
+        id: '1',
+        name: 'Rent',
+        dueDate: 1, // example timestamp
+        amount: 1200,
+        bankAccount: 'Bank A',
+        isPaid: 1,
+      };
+      const initialState: BillsState = {
+        ...initialBillsState,
+        ids: [initialBill.id],
+        entities: { [initialBill.id]: initialBill },
+        bills: [initialBill],
+        loaded: true,
+      };
+
+      const updatedBill: BillsEntity = {
+        id: '1',
+        name: 'Rent',
+        dueDate: 1, // example timestamp
+        amount: 1500,
+        bankAccount: 'Bank A',
+        isPaid: 0,
+      };
+
+      const action = BillsActions.updateBillSuccess({bill: updatedBill});
+
+      const updatedState = billsReducer(initialState, action);
+
+      expect(updatedState.loaded).toBe(true);
+      expect(updatedState.ids.length).toBe(1);
+      expect(updatedState.ids).toContain('1')
+      expect(updatedState.bills[0].amount).toBe(1500)
+
+
+    });
+
+    it.todo('update bill failure test')
+
+    it('should delete a bill in a list', () => {
+      const bills = [
+        createBillsEntity('PRODUCT-AAA'),
+        createBillsEntity('PRODUCT-zzz'),
+      ];
+
+      const loadAction = BillsActions.loadBillsSuccess({ bills });
+
+      const loadResult: BillsState = billsReducer(initialBillsState, loadAction);
+
+      expect(loadResult.loaded).toBe(true);
+      expect(loadResult.ids.length).toBe(2);
+
+      const deleteAction = BillsActions.deleteBillSuccess({ id: 'PRODUCT-AAA' });
+
+      const deleteResult: BillsState = billsReducer(loadResult, deleteAction);
+
+
+      expect(deleteResult.ids.length).toBe(1);
+      expect(deleteResult.ids).toContain('PRODUCT-zzz');
+    });
+
+    it.todo('delete bill failure test')
+
 
   });
 

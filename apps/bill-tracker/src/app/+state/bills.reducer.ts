@@ -72,7 +72,7 @@ const reducer: ActionReducer<BillsState, Action<string>> = createReducer(
   }),
 
   on(BillsActions.deleteBillSuccess, (billsState: BillsState, {id} ) => {
-    billsState.bills = billsState.bills.filter( b => b.id === id )
+    billsState.bills = billsState.bills.filter( b => b.id !== id )
     return billsAdapter.setAll(billsState.bills, billsState)
   }),
   on(BillsActions.deleteBillFailure, (billsState: BillsState, {error} ) => {
