@@ -82,8 +82,8 @@
     "e2e": {
       "executor": "@nx/cypress:cypress",
       "options": {
-        "cypressConfig": "apps/my-app-e2e/cypress.config.ts",
-        "devServerTarget": "my-app:serve"
+        "cypressConfig": "apps/bill-tracker-e2e/cypress.config.ts",
+        "devServerTarget": "bill-tracker:serve"
       }
     },
     "serve-static": {
