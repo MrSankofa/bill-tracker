@@ -13,6 +13,12 @@ export const loadBillsFailure = createAction(
   props<{ error: any }>()
 );
 
-export const addBill = createAction('[Bills] Add Bill', props<{ bill: BillsEntity }>());
-export const updateBill = createAction('[Bills] Update Bill', props<{ bill: BillsEntity }>());
-export const deleteBill = createAction('[Bills] Delete Bill', props<{ id: number }>());
+export const addBillSuccess = createAction('[Bills] Add Bill Success', props<{ bill: BillsEntity }>());
+export const addBillFailure = createAction('[Bills] Add Bill Failure', props<{ error: string }>());
+
+export const updateBillSuccess = createAction('[Bills] Update Bill Success', props<{ bill: BillsEntity }>());
+export const updateBillFailure = createAction('[Bills] Update Bill Failure', props<{ error: string }>());
+
+
+export const deleteBillSuccess = createAction('[Bills] Delete Bill Success', props<{ id: string }>());
+export const deleteBillFailure = createAction('[Bills] Delete Bill Failure', props<{ error: string }>());

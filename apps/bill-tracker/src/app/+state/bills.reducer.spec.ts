@@ -8,7 +8,7 @@ describe('Bills Reducer', () => {
   const createBillsEntity = (id: string, name = ''): BillsEntity => ({
     id,
     name: name || `name-${id}`,
-    dueDate: '',
+    dueDate: 1,
     amount: 0,
     bankAccount: '',
     isPaid: 0
@@ -27,6 +27,56 @@ describe('Bills Reducer', () => {
       expect(result.loaded).toBe(true);
       expect(result.ids.length).toBe(2);
     });
+
+    it('should return an empty list of bills with loadBillsFailure', () => {
+
+      const action = BillsActions.loadBillsFailure({ error: 'missing data' })
+
+      const result = billsReducer(initialBillsState, action);
+
+      expect(result.loaded).toBe(false)
+      expect(result.ids.length).toBe(0)
+    });
+
+    it('should add a bill to the state and not overwrite data', () => {
+
+      const initialBill: BillsEntity = {
+        id: '1',
+        name: 'Rent',
+        dueDate: 1, // example timestamp
+        amount: 1200,
+        bankAccount: 'Bank A',
+        isPaid: 1,
+      };
+      const initialState: BillsState = {
+        ...initialBillsState,
+        ids: [initialBill.id],
+        entities: { [initialBill.id]: initialBill },
+        bills: [initialBill],
+        loaded: true,
+      };
+
+      const newBill: BillsEntity = {
+        id: '2',
+        name: 'Electricity',
+        dueDate: 23, // example timestamp
+        amount: 150,
+        bankAccount: 'Bank B',
+        isPaid: 0,
+      };
+
+      const action = BillsActions.addBillSuccess({bill: newBill});
+
+      const updatedState = billsReducer(initialState, action);
+
+      expect(updatedState.loaded).toBe(true);
+      expect(updatedState.ids.length).toBe(2);
+      expect(updatedState.ids).toContain('1')
+      expect(updatedState.ids).toContain('2')
+
+    });
+
+
   });
 
   describe('unknown action', () => {
