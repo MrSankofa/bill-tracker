@@ -1,13 +1,15 @@
-import { getGreeting } from '../support/app.po';
+import { getTitle } from '../support/app.po';
+// TODO: figure out why that import function did not work
 
 describe('bill-tracker-e2e', () => {
   beforeEach(() => cy.visit('/'));
 
-  it('should display welcome message', () => {
+  it('should display Bill Tracker title', () => {
     // Custom command example, see `../support/commands.ts` file
-    cy.login('my-email@something.com', 'myPassword');
+    // todo: implement authentication
+    // cy.login('my-email@something.com', 'myPassword');
 
     // Function helper example, see `../support/app.po.ts` file
-    getGreeting().contains(/Welcome/);
+    cy.get('h1').contains(/Bill Tracker/);
   });
 });

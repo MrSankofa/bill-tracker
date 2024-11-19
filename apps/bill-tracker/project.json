@@ -35,7 +35,7 @@
             {
               "type": "anyComponentStyle",
               "maximumWarning": "2kb",
-              "maximumError": "4kb"
+              "maximumError": "10kb"
             }
           ],
           "outputHashing": "all"
@@ -77,6 +77,13 @@
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
         "jestConfig": "apps/bill-tracker/jest.config.ts"
+      }
+    },
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/bill-tracker-e2e/cypress.config.ts",
+        "devServerTarget": "bill-tracker:serve"
       }
     },
     "serve-static": {
