@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
-import { TrackerComponent } from './tracker/tracker.component';
 
 describe('AppComponent', () => {
 

@@ -4,8 +4,9 @@
 export interface BillsEntity {
   id: string; // Primary ID
   name: string;
-  dueDate: number;
   amount: number;
+  dueDate: number;
   bankAccount: string;
-  isPaid: number
+  category: string;
+  isPaid: number;
 }

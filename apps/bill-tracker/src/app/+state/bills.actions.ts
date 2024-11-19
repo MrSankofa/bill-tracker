@@ -10,7 +10,7 @@ export const loadBillsSuccess = createAction(
 
 export const loadBillsFailure = createAction(
   '[Bills/API] Load Bills Failure',
-  props<{ error: any }>()
+  props<{ error: any }>() // todo: update this error message with a convention.
 );
 
 export const addBillSuccess = createAction('[Bills] Add Bill Success', props<{ bill: BillsEntity }>());

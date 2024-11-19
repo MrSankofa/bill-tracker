@@ -1,9 +1,10 @@
 import { Route } from '@angular/router';
-import { provideStore, provideState } from '@ngrx/store';
+import { provideState } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import * as fromBills from './+state/bills.reducer';
 import { BillsEffects } from './+state/bills.effects';
 
+// todo: future routes reroute '' => 'dashbaord, bills, and anything else ** to 404 Not Found
 export const appRoutes: Route[] = [
   {
     path: '',
