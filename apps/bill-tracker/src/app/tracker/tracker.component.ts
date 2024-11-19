@@ -8,4 +8,6 @@ import { CommonModule } from '@angular/common';
   templateUrl: './tracker.component.html',
   styleUrl: './tracker.component.css',
 })
-export class TrackerComponent {}
+export class TrackerComponent {
+  title = 'bill-tracker';
+}

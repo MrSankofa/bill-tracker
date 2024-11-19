@@ -10,5 +10,4 @@ import { TrackerComponent } from './tracker/tracker.component';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  title = 'bill-tracker';
 }
