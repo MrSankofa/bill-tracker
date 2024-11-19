@@ -6,8 +6,8 @@ import { provideEffects } from '@ngrx/effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideStore(),
-    provideEffects(),
+    provideStore(), // root-level reducers go here
+    provideEffects(), // root-level effects
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(appRoutes),
   ],
