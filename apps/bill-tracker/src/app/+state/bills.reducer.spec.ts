@@ -8,6 +8,10 @@ describe('Bills Reducer', () => {
   const createBillsEntity = (id: string, name = ''): BillsEntity => ({
     id,
     name: name || `name-${id}`,
+    dueDate: '',
+    amount: 0,
+    bankAccount: '',
+    isPaid: 0
   });
 
   describe('valid Bills actions', () => {
