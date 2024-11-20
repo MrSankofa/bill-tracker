@@ -80,7 +80,11 @@
         </tr>
         </thead>
         <tbody id="bills-table">
-        <tr *ngFor="let bill of bills$ | async" class="border-b">
+        <tr *ngFor="let bill of bills$ | async" class="border-b"
+            [class.bg-yellow-200]="bill.id === highlightedBillId"
+            [class.transition]="bill.id === highlightedBillId"
+            [class.duration-300]="bill.id === highlightedBillId"
+        >
           <td class="px-4 py-2">{{ bill.name }}</td>
           <td class="px-4 py-2">{{ bill.dueDate }}</td>
           <td class="px-4 py-2">{{ bill.amount | currency }}</td>
@@ -126,7 +130,7 @@
             </div>
 
             <div class="relative group">
-              <button class="text-blue-500 hover:text-blue-700">
+              <button class="text-blue-500 hover:text-blue-700" (click)="startEdit(bill)">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"

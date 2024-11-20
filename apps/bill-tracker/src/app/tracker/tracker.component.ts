@@ -18,15 +18,31 @@ export class TrackerComponent {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-expect-error
   bills$: Observable<BillsEntity[]> = [];
+  isEditing = false; // Tracks if we are editing a bill
   isModalCSVOpen = false;
   isModalOpen = false;
   selectedBillId: string | null = null;
+  highlightedBillId: string | null = null; // To track the highlighted bill
+
 
   csvData: any[] = [];  // todo: marked for deletion
 
   constructor(private store: Store) {
     this.store = store;
     this.bills$ = this.store.select(selectAllBills)
+  }
+
+  startEdit(bill: BillsEntity): void {
+    this.isEditing = true;
+    this.selectedBillId = bill.id;
+
+    // Populate form fields with the selected bill's details
+    (document.getElementById('bill-id') as HTMLInputElement).value = bill.id;
+    (document.getElementById('bill-name') as HTMLInputElement).value = bill.name;
+    (document.getElementById('due-date') as HTMLInputElement).value = bill.dueDate.toString();
+    (document.getElementById('bill-amount') as HTMLInputElement).value = bill.amount.toString();
+    (document.getElementById('source') as HTMLInputElement).value = bill.bankAccount;
+    (document.getElementById('category') as HTMLInputElement).value = bill.category;
   }
   // Handle form submission for adding/updating a bill
   saveBill(event: Event): void {
@@ -39,9 +55,30 @@ export class TrackerComponent {
     const source = (document.getElementById('source') as HTMLInputElement).value;
     const category = (document.getElementById('category') as HTMLInputElement).value;
 
-    const bill: BillsEntity = { id, name, dueDate: dueDate, amount, bankAccount: source, category, isPaid: 0 };
+    if (this.isEditing) {
+      // Update an existing bill
+      const updatedBill: BillsEntity = { id, name, dueDate, amount, bankAccount: source, category, isPaid: 0 };
+      this.store.dispatch(BillsActions.updateBillSuccess({ bill: updatedBill }));
+    } else {
+      // Add a new bill
+      const newBill: BillsEntity = { id, name, dueDate, amount, bankAccount: source, category, isPaid: 0 };
+      this.store.dispatch(BillsActions.addBillSuccess({ bill: newBill }));
+    }
 
-    this.store.dispatch(BillsActions.addBillSuccess({ bill }));
+    // Reset form and editing state
+    this.resetForm();
+
+    // Highlight the updated row
+    this.highlightUpdatedRow(id);
+  }
+
+  // Highlight a row for a few seconds
+  highlightUpdatedRow(id: string): void {
+    this.highlightedBillId = id;
+
+    setTimeout(() => {
+      this.highlightedBillId = null;
+    }, 3000); // Highlight for 3 seconds
   }
 
   // Handle CSV file upload
@@ -120,6 +157,19 @@ export class TrackerComponent {
   closeModal(): void {
     this.isModalOpen = false;
     this.isModalCSVOpen = false;
+  }
+
+  // Reset the form and exit edit mode
+  resetForm(): void {
+    this.isEditing = false;
+    this.selectedBillId = null;
+
+    (document.getElementById('bill-id') as HTMLInputElement).value = '';
+    (document.getElementById('bill-name') as HTMLInputElement).value = '';
+    (document.getElementById('due-date') as HTMLInputElement).value = '';
+    (document.getElementById('bill-amount') as HTMLInputElement).value = '';
+    (document.getElementById('source') as HTMLInputElement).value = '';
+    (document.getElementById('category') as HTMLInputElement).value = '';
   }
 
 
