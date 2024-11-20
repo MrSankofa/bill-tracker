@@ -55,16 +55,62 @@
         </tr>
         </thead>
         <tbody id="bills-table">
-          <tr *ngFor="let bill of bills$ | async">
-            <td>{{ bill.name }}</td>
-            <td>{{ bill.dueDate | date }}</td>
-            <td>{{ bill.amount | currency }}</td>
-            <td>{{ bill.bankAccount }}</td>
-            <td>{{ bill.category }}</td>
-            <td>{{ bill.isPaid ? 'Yes' : 'No' }}</td>
-          </tr>
+        <tr *ngFor="let bill of bills$ | async" class="border-b">
+          <td class="px-4 py-2">{{ bill.name }}</td>
+          <td class="px-4 py-2">{{ bill.dueDate | date }}</td>
+          <td class="px-4 py-2">{{ bill.amount | currency }}</td>
+          <td class="px-4 py-2">{{ bill.bankAccount }}</td>
+          <td class="px-4 py-2">{{ bill.category }}</td>
+          <td class="px-4 py-2">{{ bill.isPaid ? 'Yes' : 'No' }}</td>
+          <td class="px-4 py-2 text-right">
+            <button
+              (click)="openDeleteModal(bill.id)"
+              class="text-red-500 hover:text-red-700"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </td>
+        </tr>
         </tbody>
       </table>
     </div>
   </div>
 </section>
+
+<!-- Modal -->
+<div
+  *ngIf="isModalOpen"
+  class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50"
+>
+  <div class="bg-white rounded-lg shadow-lg p-6 w-96 text-center">
+    <h2 class="text-xl font-semibold mb-4">Delete Confirmation</h2>
+    <p class="text-gray-600 mb-6">Are you sure you want to delete this bill?</p>
+    <div class="flex justify-center space-x-4">
+      <button
+        (click)="confirmDelete()"
+        class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+      >
+        Yes
+      </button>
+      <button
+        (click)="closeDeleteModal()"
+        class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+      >
+        No
+      </button>
+    </div>
+  </div>
+</div>

@@ -18,6 +18,8 @@ export class TrackerComponent {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-expect-error
   bills$: Observable<BillsEntity[]> = [];
+  isModalOpen = false;
+  selectedBillId: string | null = null;
 
 
   constructor(private store: Store) {
@@ -72,5 +74,22 @@ export class TrackerComponent {
   // Handle sorting bills
   sortBills(column: string): void {
     // this.store.dispatch(BillsActions.sortBills({ column, order: 'asc' })); // Example: Sorting in ascending order
+  }
+
+  openDeleteModal(id: string): void {
+    this.isModalOpen = true;
+    this.selectedBillId = id;
+  }
+
+  closeDeleteModal(): void {
+    this.isModalOpen = false;
+    this.selectedBillId = null;
+  }
+
+  confirmDelete(): void {
+    if (this.selectedBillId) {
+      this.store.dispatch(BillsActions.deleteBillSuccess({ id: this.selectedBillId }));
+      this.closeDeleteModal();
+    }
   }
 }
