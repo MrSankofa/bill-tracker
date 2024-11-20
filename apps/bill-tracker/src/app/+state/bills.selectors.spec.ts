@@ -197,6 +197,6 @@ describe('Bills Selectors', () => {
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
 const callSelector = (selector, state, ...args) => {
-  return selector.projector(state.bills.bills, ...args);
+  return selector.projector(state.bills.bills, ...args); // yes this is funky I will have tor revisit
 }
 
