@@ -11,7 +11,8 @@ describe('Bills Reducer', () => {
     dueDate: 1,
     amount: 0,
     bankAccount: '',
-    isPaid: 0
+    isPaid: 0,
+    category: 'Fixed Monthly Bill'
   });
 
   describe('valid Bills actions', () => {
@@ -47,6 +48,7 @@ describe('Bills Reducer', () => {
         amount: 1200,
         bankAccount: 'Bank A',
         isPaid: 1,
+        category: 'Fixed Monthly Bill'
       };
       const initialState: BillsState = {
         ...initialBillsState,
@@ -63,6 +65,7 @@ describe('Bills Reducer', () => {
         amount: 150,
         bankAccount: 'Bank B',
         isPaid: 0,
+        category: 'Fixed Monthly Bill'
       };
 
       const action = BillsActions.addBillSuccess({bill: newBill});
@@ -86,6 +89,7 @@ describe('Bills Reducer', () => {
         amount: 1200,
         bankAccount: 'Bank A',
         isPaid: 1,
+        category: 'Fixed Monthly Bill'
       };
       const initialState: BillsState = {
         ...initialBillsState,
@@ -102,6 +106,7 @@ describe('Bills Reducer', () => {
         amount: 1500,
         bankAccount: 'Bank A',
         isPaid: 0,
+        category: 'Fixed Monthly Bill'
       };
 
       const action = BillsActions.updateBillSuccess({bill: updatedBill});
