@@ -4,7 +4,8 @@
   "license": "MIT",
   "scripts": {
     "cypress": "nx e2e bill-tracker-e2e",
-    "build": "nx build"
+    "build": "nx build bill-tracker",
+    "test": "nx test bill-tracker"
   },
   "private": true,
   "dependencies": {
