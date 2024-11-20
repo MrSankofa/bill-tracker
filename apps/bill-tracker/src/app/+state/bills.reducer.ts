@@ -52,8 +52,11 @@ const reducer: ActionReducer<BillsState, Action<string>> = createReducer(
     return ({ ...state, bills, error });
   }),
   on(BillsActions.addBillSuccess, ( billsState, {bill} ) => {
-    billsState.bills = [...billsState.bills, bill]
-    return billsAdapter.setAll(billsState.bills, billsState)
+    const updatedList = [...billsState.bills, bill];
+    return {
+      ...billsAdapter.setAll(updatedList, billsState),
+      bills: updatedList
+    }
   }),
 
   on(BillsActions.addBillFailure, ( billsState, {error} ) => {
@@ -62,8 +65,11 @@ const reducer: ActionReducer<BillsState, Action<string>> = createReducer(
   }),
 
   on(BillsActions.updateBillSuccess, (billsState, { bill} ) => {
-    billsState.bills = billsState.bills.map( b => b.id === bill.id ? bill : b)
-    return billsAdapter.setAll(billsState.bills, billsState)
+    const updatedList = billsState.bills.map(b => (b.id === bill.id ? bill : b));
+    return {
+      ...billsAdapter.setAll(updatedList, billsState),
+      bills: updatedList, // Explicitly update the `bills` array
+    };
   }),
 
   on(BillsActions.updateBillFailure, ( billsState, {error} ) => {
@@ -72,12 +78,29 @@ const reducer: ActionReducer<BillsState, Action<string>> = createReducer(
   }),
 
   on(BillsActions.deleteBillSuccess, (billsState: BillsState, {id} ) => {
-    billsState.bills = billsState.bills.filter( b => b.id !== id )
-    return billsAdapter.setAll(billsState.bills, billsState)
+
+    const updatedList = billsState.bills.filter( b => b.id !== id );
+    return {
+      ...billsAdapter.setAll(billsState.bills.filter(b => b.id !== id), billsState),
+      bills: updatedList
+    }
   }),
   on(BillsActions.deleteBillFailure, (billsState: BillsState, {error} ) => {
     console.error(`Error: trouble deleting bill. Keeping original state. - ${error}`)
     return billsState;
+  }),
+
+  // Todo: write a test for this to ensure that it doesn't overwrite the data
+  on(BillsActions.loadCSVSuccess, (billsState: BillsState, { bills}) => {
+    const updatedList = [...billsState.bills, ...bills]
+    return {
+      ...billsAdapter.setAll(updatedList, billsState),
+      bills: updatedList
+    }
+  }),
+  on(BillsActions.loadBillsFailure, (billsState: BillsState, { error}) => {
+    console.error(`Error: trouble loading csv. Keeping original state. - ${error}`)
+    return billsState
   })
 );
 

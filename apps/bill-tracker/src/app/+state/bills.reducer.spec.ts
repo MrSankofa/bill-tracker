@@ -76,6 +76,7 @@ describe('Bills Reducer', () => {
       expect(updatedState.ids.length).toBe(2);
       expect(updatedState.ids).toContain('1')
       expect(updatedState.ids).toContain('2')
+      expect(updatedState.bills.length).toBe(2)
 
     });
 
