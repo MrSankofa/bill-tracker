@@ -3,7 +3,7 @@
     <h1 class="text-2xl font-bold mb-4 text-center">Bill Tracker</h1>
 
     <!-- Form to Add/Update Bills -->
-    <form id="bill-form" class="bg-white p-4 rounded shadow mb-4">
+    <form id="bill-form"  (submit)="saveBill($event)" class="bg-white p-4 rounded shadow mb-4">
       <input type="hidden" id="bill-id">
       <div class="mb-3">
         <label for="bill-name" class="block text-sm font-medium">Bill Name</label>
@@ -34,7 +34,7 @@
     <div class="bg-white p-4 rounded shadow mb-4">
       <h2 class="text-lg font-bold mb-3">Upload CSV File</h2>
       <input type="file" id="csv-file" accept=".csv" class="w-full mb-3 p-2 border rounded">
-      <button onclick="uploadCSV()" class="w-full bg-green-500 text-white p-2 rounded hover:bg-green-600">
+      <button (change)="uploadCSV($event)" class="w-full bg-green-500 text-white p-2 rounded hover:bg-green-600">
         Import Bills from CSV
       </button>
     </div>
@@ -45,11 +45,11 @@
       <table class="w-full table-auto">
         <thead>
         <tr class="bg-gray-200">
-          <th class="p-2 text-left cursor-pointer" onclick="sortBills('name')">Bill Name</th>
-          <th class="p-2 text-left cursor-pointer" onclick="sortBills('dueDate')">Due Date</th>
-          <th class="p-2 text-left cursor-pointer" onclick="sortBills('amount')">Amount ($)</th>
-          <th class="p-2 text-left cursor-pointer" onclick="sortBills('source')">Source</th>
-          <th class="p-2 text-left cursor-pointer" onclick="sortBills('category')">Category</th>
+          <th class="p-2 text-left cursor-pointer" (click)="sortBills('name')">Bill Name</th>
+          <th class="p-2 text-left cursor-pointer" (click)="sortBills('dueDate')">Due Date</th>
+          <th class="p-2 text-left cursor-pointer" (click)="sortBills('amount')">Amount ($)</th>
+          <th class="p-2 text-left cursor-pointer" (click)="sortBills('source')">Source</th>
+          <th class="p-2 text-left cursor-pointer" (click)="sortBills('category')">Category</th>
           <th class="p-2 text-center">Actions</th>
         </tr>
         </thead>
