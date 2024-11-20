@@ -50,10 +50,20 @@
           <th class="p-2 text-left cursor-pointer" (click)="sortBills('amount')">Amount ($)</th>
           <th class="p-2 text-left cursor-pointer" (click)="sortBills('source')">Source</th>
           <th class="p-2 text-left cursor-pointer" (click)="sortBills('category')">Category</th>
+          <th class="p-2 text-left cursor-pointer" (click)="sortBills('isPaid')">Paid</th>
           <th class="p-2 text-center">Actions</th>
         </tr>
         </thead>
-        <tbody id="bills-table"></tbody>
+        <tbody id="bills-table">
+          <tr *ngFor="let bill of bills$ | async">
+            <td>{{ bill.name }}</td>
+            <td>{{ bill.dueDate | date }}</td>
+            <td>{{ bill.amount | currency }}</td>
+            <td>{{ bill.bankAccount }}</td>
+            <td>{{ bill.category }}</td>
+            <td>{{ bill.isPaid ? 'Yes' : 'No' }}</td>
+          </tr>
+        </tbody>
       </table>
     </div>
   </div>

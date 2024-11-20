@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { BillsEntity } from '../+state/bills.models';
 import { Store } from '@ngrx/store';
 import * as BillsActions from '../+state/bills.actions'
+import { Observable } from 'rxjs';
+import { selectAllBills } from '../+state/bills.selectors';
 
 @Component({
   selector: 'app-tracker',
@@ -13,9 +15,14 @@ import * as BillsActions from '../+state/bills.actions'
 })
 export class TrackerComponent {
   title = 'bill-tracker';
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
+  bills$: Observable<BillsEntity[]> = [];
+
 
   constructor(private store: Store) {
     this.store = store;
+    this.bills$ = this.store.select(selectAllBills)
   }
   // Handle form submission for adding/updating a bill
   saveBill(event: Event): void {

@@ -6,7 +6,8 @@
     "cypress": "nx e2e bill-tracker-e2e",
     "build": "nx build bill-tracker",
     "test": "nx test bill-tracker",
-    "start": "nx serve bill-tracker"
+    "start": "nx serve bill-tracker",
+    "arewegood": "npm run build && npm run test && npm run cypress"
   },
   "private": true,
   "dependencies": {
