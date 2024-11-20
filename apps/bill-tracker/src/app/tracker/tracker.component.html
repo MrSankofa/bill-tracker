@@ -33,10 +33,35 @@
     <!-- Upload CSV File Section -->
     <div class="bg-white p-4 rounded shadow mb-4">
       <h2 class="text-lg font-bold mb-3">Upload CSV File</h2>
-      <input type="file" id="csv-file" accept=".csv" class="w-full mb-3 p-2 border rounded">
-      <button (change)="uploadCSV($event)" class="w-full bg-green-500 text-white p-2 rounded hover:bg-green-600">
+      <input
+        type="file"
+        id="csv-file"
+        accept=".csv"
+        class="w-full mb-3 p-2 border rounded"
+        (change)="uploadCSV($event)"
+      />
+      <button
+        class="w-full bg-green-500 text-white p-2 rounded hover:bg-green-600"
+      >
         Import Bills from CSV
       </button>
+
+      <!-- Success Modal -->
+      <div
+        *ngIf="isModalCSVOpen"
+        class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50"
+      >
+        <div class="bg-white rounded-lg shadow-lg p-6 w-96 text-center">
+          <h2 class="text-xl font-semibold mb-4">Success</h2>
+          <p class="text-gray-600 mb-6">The CSV file has been uploaded successfully!</p>
+          <button
+            (click)="closeModal()"
+            class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+          >
+            OK
+          </button>
+        </div>
+      </div>
     </div>
 
     <!-- Table of Bills with Sortable Columns -->
@@ -57,31 +82,76 @@
         <tbody id="bills-table">
         <tr *ngFor="let bill of bills$ | async" class="border-b">
           <td class="px-4 py-2">{{ bill.name }}</td>
-          <td class="px-4 py-2">{{ bill.dueDate | date }}</td>
+          <td class="px-4 py-2">{{ bill.dueDate }}</td>
           <td class="px-4 py-2">{{ bill.amount | currency }}</td>
           <td class="px-4 py-2">{{ bill.bankAccount }}</td>
           <td class="px-4 py-2">{{ bill.category }}</td>
           <td class="px-4 py-2">{{ bill.isPaid ? 'Yes' : 'No' }}</td>
-          <td class="px-4 py-2 text-right">
-            <button
-              (click)="openDeleteModal(bill.id)"
-              class="text-red-500 hover:text-red-700"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="w-6 h-6"
+          <td class="px-4 py-2 text-right flex">
+            <div class="relative group">
+              <button
+                (click)="openDeleteModal(bill.id)"
+                class="text-red-500 hover:text-red-700"
               >
-                <path
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-6 h-6"
+                >
+                  <!-- Circle -->
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="9"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    fill="none"
+                  />
+                  <!-- X -->
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+              <div
+                class="absolute bottom-8 left-1/2 -translate-x-1/2 bg-gray-700 text-white text-sm rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity"
+              >
+                Delete
+              </div>
+            </div>
+
+            <div class="relative group">
+              <button class="text-blue-500 hover:text-blue-700">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
+                  class="w-6 h-6"
+                >
+                  <!-- Pencil body -->
+                  <path d="M3 21l3-3 12-12a2 2 0 0 0-3-3L3 15l-3 3v3h3z" />
+                  <!-- Pencil tip -->
+                  <path d="M14 5l5 5" />
+                  <!-- Eraser -->
+                  <rect x="15" y="2" width="4" height="4" fill="currentColor" />
+                </svg>
+              </button>
+              <div
+                class="absolute bottom-8 left-1/2 -translate-x-1/2 bg-gray-700 text-white text-sm rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity"
+              >
+                Update
+              </div>
+            </div>
+
           </td>
         </tr>
         </tbody>

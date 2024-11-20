@@ -88,6 +88,19 @@ const reducer: ActionReducer<BillsState, Action<string>> = createReducer(
   on(BillsActions.deleteBillFailure, (billsState: BillsState, {error} ) => {
     console.error(`Error: trouble deleting bill. Keeping original state. - ${error}`)
     return billsState;
+  }),
+
+  // Todo: write a test for this to ensure that it doesn't overwrite the data
+  on(BillsActions.loadCSVSuccess, (billsState: BillsState, { bills}) => {
+    const updatedList = [...billsState.bills, ...bills]
+    return {
+      ...billsAdapter.setAll(updatedList, billsState),
+      bills: updatedList
+    }
+  }),
+  on(BillsActions.loadBillsFailure, (billsState: BillsState, { error}) => {
+    console.error(`Error: trouble loading csv. Keeping original state. - ${error}`)
+    return billsState
   })
 );
 

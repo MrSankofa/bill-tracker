@@ -22,3 +22,6 @@ export const updateBillFailure = createAction('[Bills] Update Bill Failure', pro
 
 export const deleteBillSuccess = createAction('[Bills] Delete Bill Success', props<{ id: string }>());
 export const deleteBillFailure = createAction('[Bills] Delete Bill Failure', props<{ error: string }>());
+
+export const loadCSVSuccess = createAction('[Bills] Load CSV Success', props<{ bills: BillsEntity[]}>())
+export const loadCSVFailure = createAction('[Bills] Load CSV Failure', props<{ error: string }>)
