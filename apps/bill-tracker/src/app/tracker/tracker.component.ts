@@ -6,6 +6,8 @@ import * as BillsActions from '../+state/bills.actions'
 import { Observable } from 'rxjs';
 import { selectAllBills } from '../+state/bills.selectors';
 
+// todo: add cypress tests for all of these functions
+
 @Component({
   selector: 'app-tracker',
   standalone: true,
