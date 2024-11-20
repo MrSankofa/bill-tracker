@@ -16,6 +16,7 @@ import {
 } from './bills.selectors';
 import { billsAdapter, BillsPartialState, BillsState, initialBillsState } from './bills.reducer';
 
+// test pipeline
 
 describe('Bills Selectors', () => {
   let mockBills: BillsEntity[];
