@@ -22,7 +22,7 @@ export class TrackerComponent {
   isModalOpen = false;
   selectedBillId: string | null = null;
 
-  csvData: any[] = [];
+  csvData: any[] = [];  // todo: marked for deletion
 
   constructor(private store: Store) {
     this.store = store;
@@ -122,7 +122,8 @@ export class TrackerComponent {
     this.isModalCSVOpen = false;
   }
 
-  // Handle sorting bills
+
+  // TODO: Handle sorting bills
   sortBills(column: string): void {
     // this.store.dispatch(BillsActions.sortBills({ column, order: 'asc' })); // Example: Sorting in ascending order
   }

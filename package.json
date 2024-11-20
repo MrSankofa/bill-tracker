@@ -7,7 +7,8 @@
     "build": "nx build bill-tracker",
     "test": "nx test bill-tracker",
     "start": "nx serve bill-tracker",
-    "arewegood": "npm run build && npm run test && npm run cypress"
+    "lint": "nx lint bill-tracker",
+    "arewegood": "npm run build && npm run test && npm run cypress && npm run lint"
   },
   "private": true,
   "dependencies": {
