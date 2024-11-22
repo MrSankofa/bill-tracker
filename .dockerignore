@@ -1,0 +1,8 @@
+.github
+.idea
+.vscode
+node_modules
+dist
+.angular/cache
+cypress
+apps/bill-tracker-e2e

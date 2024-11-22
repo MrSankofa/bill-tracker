@@ -26,6 +26,7 @@
     "@ngrx/router-store": "^18.0.2",
     "@ngrx/store": "^18.1.1",
     "@ngrx/store-devtools": "^18.1.1",
+    "@nx/node": "^20.1.2",
     "rxjs": "~7.8.0",
     "zone.js": "~0.14.3"
   },
@@ -39,6 +40,7 @@
     "@eslint/js": "^9.8.0",
     "@ngrx/schematics": "^18.0.2",
     "@nrwl/angular": "^19.8.4",
+    "@nrwl/cli": "^15.9.3",
     "@nx/angular": "20.1.2",
     "@nx/cypress": "20.1.2",
     "@nx/eslint": "20.1.2",
